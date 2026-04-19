@@ -424,7 +424,6 @@ async function submitOrder() {
   const btn     = document.getElementById('submitBtn');
 
   msg.className = 'form-msg';
-  msg.style.display = 'none';
 
   if (!name || !phone || !city || !address) {
     msg.className = 'form-msg error';
@@ -432,9 +431,9 @@ async function submitOrder() {
     return;
   }
 
-  if (!/^[0-9+\s]{8,15}$/.test(phone)) {
+  if (!/^[0-9+\s]{10,15}$/.test(phone)) {
     msg.className = 'form-msg error';
-    msg.textContent = '⚠️ رقم الهاتف غير صحيح';
+    msg.textContent = '⚠️ رقم الهاتف غير صحيح، يجب أن يحتوي على 10 أرقام على الأقل';
     return;
   }
 
@@ -488,7 +487,18 @@ const observer = new IntersectionObserver(entries => {
 document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
 window.addEventListener('scroll', () => {
-  document.getElementById('stickyCta').classList.toggle('show', window.scrollY > 500);
+  const stickyCta = document.getElementById('stickyCta');
+  const orderSection = document.getElementById('order');
+  const footer = document.querySelector('footer');
+
+  const orderTop = orderSection.getBoundingClientRect().top;
+  const footerTop = footer.getBoundingClientRect().top;
+
+  const nearOrder = orderTop < window.innerHeight * 0.8;
+  const footerVisible = footerTop < window.innerHeight;
+
+  const shouldShow = window.scrollY > 500 && !nearOrder && !footerVisible;
+  stickyCta.classList.toggle('show', shouldShow);
 });
 </script>
 </body>
