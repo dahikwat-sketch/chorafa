@@ -1,6 +1,10 @@
  <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-<head> 
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>حزمة الشفاء الطبيعية - زيت الشفاء + كبسولات السنا</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
 <!-- Meta Pixel Code -->
 <script>
 !function(f,b,e,v,n,t,s)
@@ -18,12 +22,6 @@ fbq('track', 'PageView');
 src="https://www.facebook.com/tr?id=1278561067818152&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
- </head>
- <body>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>حزمة الشفاء الطبيعية - زيت الشفاء + كبسولات السنا</title>
-<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root {
     --gold: #C8973A;
@@ -456,6 +454,11 @@ async function submitOrder() {
     return;
   }
 
+  // ✅ وصلنا هنا = الحقول صحيحة، نسجل Lead الآن
+  if (typeof fbq === 'function') {
+    fbq('track', 'Lead', { content_name: 'حزمة الشفاء الطبيعية', currency: 'MAD', value: 220 });
+  }
+
   btn.disabled = true;
   btn.innerHTML = 'جاري الإرسال... <span class="spinner"></span>';
 
@@ -479,9 +482,6 @@ async function submitOrder() {
     });
     msg.className = 'form-msg success';
     msg.textContent = '✅ تم إرسال طلبك بنجاح! سنتواصل معك قريباً لتأكيد التوصيل.';
-   if (typeof fbq === 'function') {
-      fbq('track', 'Lead');
-    }
     document.getElementById('f-name').value = '';
     document.getElementById('f-phone').value = '';
     document.getElementById('f-city').value = '';
