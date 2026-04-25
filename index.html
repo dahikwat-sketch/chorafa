@@ -454,11 +454,6 @@ async function submitOrder() {
     return;
   }
 
-  // ✅ وصلنا هنا = الحقول صحيحة، نسجل Lead الآن
-  if (typeof fbq === 'function') {
-    fbq('track', 'Lead', { content_name: 'حزمة الشفاء الطبيعية', currency: 'MAD', value: 220 });
-  }
-
   btn.disabled = true;
   btn.innerHTML = 'جاري الإرسال... <span class="spinner"></span>';
 
@@ -482,6 +477,7 @@ async function submitOrder() {
     });
     msg.className = 'form-msg success';
     msg.textContent = '✅ تم إرسال طلبك بنجاح! سنتواصل معك قريباً لتأكيد التوصيل.';
+    fbq('track', 'Lead');
     document.getElementById('f-name').value = '';
     document.getElementById('f-phone').value = '';
     document.getElementById('f-city').value = '';
