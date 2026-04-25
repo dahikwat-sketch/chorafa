@@ -479,7 +479,9 @@ async function submitOrder() {
     });
     msg.className = 'form-msg success';
     msg.textContent = '✅ تم إرسال طلبك بنجاح! سنتواصل معك قريباً لتأكيد التوصيل.';
-   fbq('track', 'Lead');
+   if (typeof fbq === 'function') {
+      fbq('track', 'Lead');
+    }
     document.getElementById('f-name').value = '';
     document.getElementById('f-phone').value = '';
     document.getElementById('f-city').value = '';
